@@ -10,7 +10,9 @@ Enter:
 
 Your choice:"""
 
+
 def menu():
+    database.create_book_table()
     user_input = input(USER_CHOISE)
     while user_input != 'q':
         if user_input == 'a':
@@ -33,16 +35,19 @@ def prompt_add_book():
 
     database.add_book(name, author)
 
+
 def list_books():
     books = database.get_all_books()
     for book in books:
-        read = 'YES' if book['read'] else 'NO'
-        print(f"{book['name']} by {book['author']}, resd: {read}")
+        read = 'YES' if book['read'] == 1 else 'NO'
+        print(f"{book['name']} by {book['author']}, read: {read}")
+
 
 def prompt_read_book():
     name = input('Enter the name of the book you just have read: ')
 
     database.mark_book_as_read(name)
+
 
 def prompt_delete_book():
     name = input('Enter the name of the book you wish to delete: ')
